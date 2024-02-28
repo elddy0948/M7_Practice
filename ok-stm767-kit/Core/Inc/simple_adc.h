@@ -9,6 +9,6 @@
 #define INC_SIMPLE_ADC_H_
 
 void adc_init(void);
-void temerature_setup(void);
+void temperature_setup(void);
 
 #endif /* INC_SIMPLE_ADC_H_ */

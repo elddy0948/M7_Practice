@@ -18,6 +18,8 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+// #include "simple_adc.h"
+#include "simple_pwm.h"
 
 void SystemClock_Config(void);
 static void MPU_Config(void);
@@ -35,12 +37,12 @@ int main(void)
   HAL_Init();
   SystemClock_Config();
 
-  RCC->AHB1ENR |= 0x00000004;
-  GPIOC->MODER |= 0x00000100;
+  // adc_init();
+  init_pwm(499);
 
   while (1)
   {
-	  HAL_GPIO_WritePin(LED_PORT, LED_PIN, GPIO_PIN_SET);
+	  // temperature_setup();
   }
 }
 

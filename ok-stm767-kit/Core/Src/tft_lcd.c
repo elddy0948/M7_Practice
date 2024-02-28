@@ -1,0 +1,26 @@
+/*
+ * tft_lcd.c
+ *
+ *  Created on: Feb 27, 2024
+ *      Author: hojoon
+ */
+
+#include "tft_lcd.h"
+#include "stm32f767xx.h"
+
+void init_tft_lcd(void)
+{
+	RCC->AHB1ENR |= 0x00000030; // PORTF CLOCK ENABLE
+	GPIOF->MODER = 0x55555555;	// PORTF 0 ~ 15 ALTERNATE FUNCTION MODE
+	GPIOF->ODR = 0x00000000;	// 0 ~ 15 OUTPUT DATA REGISTER TO 0
+	GPIOF->OSPEEDR = 0x55555555;	// 0 ~ 15 pin speed medium
+
+	GPIOE->MODER &= 0xFFFFFF00;	// CLEAR PORTE 0 ~ 3
+	GPIOE->MODER |= 0x00000055;	// PORTE 0 ~ 3 ALTERNATE FUNCTION MODE
+	GPIOE->ODR |= 0x0000000D;	// SET TFT_RESET, TFT_CS, TFT_MR
+	GPIOE->OSPEEDR &= 0xFFFFFF00;
+	GPIOE->OSPEEDR |= 0x00000055;
+
+	GPIOE->BSRR = 0x00080000;	// TFT_RESET = 0
+	GPIOE->BSRR = 0x00000008;	// TFT_RESET = 1
+}

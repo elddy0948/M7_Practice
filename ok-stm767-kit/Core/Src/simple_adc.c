@@ -7,6 +7,7 @@
 
 #include "simple_adc.h"
 #include "stm32f767xx.h"
+#include "stm32f7xx_hal.h"
 
 void adc_init(void)
 {
@@ -21,7 +22,7 @@ void adc_init(void)
 	ADC1->SQR1 = 0x00000000;
 }
 
-void temerature_setup(void)
+void temperature_setup(void)
 {
 	float temperature = 0.0f;
 	unsigned short result = 0;
@@ -33,10 +34,14 @@ void temerature_setup(void)
 	while(!(ADC1->SR & 0x00000002));
 	result = ADC1->DR;
 
+	temperature = (float)result * 3.3 / 4095.;
+	temperature = (temperature - 0.76) / 0.0025 + 25.;
+
 	ADC1->SQR3 = 0x00000012;
 	ADC1->CR2 |= 0x40000000;
 	while(!(ADC1->SR & 0x00000002));
 	result = ADC1->DR;
+
 	temperature = (float)result * 3.3 / 4095.;
 	temperature = (temperature - 0.76) / 0.0025 + 25.;
 }
