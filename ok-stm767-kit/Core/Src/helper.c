@@ -1,0 +1,237 @@
+/*
+ * helper.c
+ *
+ *  Created on: Feb 29, 2024
+ *      Author: hojoon
+ */
+
+
+void Delay_us(unsigned int time_us)
+{
+	register unsigned int i;
+	for (i = 0; i < time_us * 2; ++i)
+	{
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");	// 10
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");	// 100
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");	// 10
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");	// 200
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");	// 210
+		asm("NOP");
+		asm("NOP");
+		asm("NOP");	// 213
+
+	}
+}
+
+void Delay_ms(unsigned int time_ms)
+{
+	register unsigned int i;
+
+	for (i = 0; i < time_ms; ++i)
+		Delay_us(1000);
+}

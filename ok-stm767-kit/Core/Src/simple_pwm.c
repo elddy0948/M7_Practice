@@ -16,8 +16,7 @@ void init_pwm(unsigned int pwm)
 
 	/* PE9 = TIM1_CH1 */
 	GPIOE->AFR[1] &= 0xFFFFFF0F;
-	// TODO: - CHECK BELOW
-	GPIOE->AFR[1] |= 0x00000010;
+	GPIOE->AFR[1] |= 0x00000010;	// Select PE9 AF1
 
 	/* Enable TIM1 CLK */
 	RCC->APB2ENR |= 0x00000001;
@@ -26,8 +25,8 @@ void init_pwm(unsigned int pwm)
 	TIM1->ARR = 999;	// 1MHz / (999 + 1) = 1kHz
 	TIM1->CCR1 = pwm;
 	TIM1->CNT = 0;
-	// CCMR SETUP
+	TIM1->CCMR1 = 0x0000006C;	// PWM MODE 1, OC1PE = 1, OC1M = 110
 	TIM1->CCER = 0x00000001;	// ENABLE OC1 OUTPUT
 	TIM1->BDTR = 0x00008000;	// MOE = 1
-	TIM1->CR1 = 0x0005;	// EDGE-ALIGNED, UP-COUNJTER, ENABLE TIM1
+	TIM1->CR1 = 0x0005;	// EDGE-ALIGNED, UP-COUNTER, ENABLE TIM1
 }
