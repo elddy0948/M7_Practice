@@ -10,27 +10,6 @@
 #include "tft_lcd.h"
 #include "stm32f767xx.h"
 
-void setup_spi(void)
-{
-	// PA5 = SPI1_SCK, PA6 = SPI1_MISO, PA7 = SPI1_MOSI
-	GPIOA->MODER |= 0x0000A800;
-	// PA5 = AF5, PA6 = AF5, PA7 = AF5
-	GPIOA->AFR[0] |= 0x55500000;
-
-	// PB3 = SPI3_SCK, PB4 = SPI3_MISO, PB5 = SPI3_MOSI
-	GPIOB->MODER |= 0x00000A80;
-	// PB3 = AF6, PB4 = AF6, PB5 = AF6
-	GPIOB->AFR[0] |= 0x00066600;
-
-	// PA3 = TS_INT, PA4 = TS_CS
-	GPIOA->MODER |= 0x00000040; // PA3 = INPUT, PA4 = OUTPUT
-	GPIOA->ODR |= 0x00000010;		// PA4 = 1
-
-	// PB1 = SD_OK(INPUT), PB2 = SD_CS(OUTPUT)
-	GPIOB->MODER |= 0x00000008; // PB1 = INPUT, PB2 = OUTPUT
-	GPIOB->ODR |= 0x00000004;		// PB2 = 1
-}
-
 void TFT_init(void)
 {
 	RCC->AHB1ENR |= 0x00000018;
