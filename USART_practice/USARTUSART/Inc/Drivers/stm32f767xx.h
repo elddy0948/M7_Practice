@@ -58,4 +58,28 @@
 #define SYSCFG_BASEADDR		(APB2PERIPH_BASEADDR + 0x3800U)
 #define EXTI_BASEADDR		(APB2PERIPH_BASEADDR + 0x3C00U)
 
+
+// Peripheral register definition structures
+
+//GPIO
+typedef struct
+{
+	uint32_t MODER;		// ADDRESS OFFSET : 0x00
+	uint32_t OTYPER;	// ADDRESS OFFSET : 0x04
+	uint32_t OSPEEDR;	// ADDRESS OFFSET : 0x08
+	uint32_t PUPDR;		// ADDRESS OFFSET : 0x0C
+	uint32_t IDR;		// ADDRESS OFFSET : 0x10
+	uint32_t ODR;		// ADDRESS OFFSET : 0x14
+	uint32_t BSRR;		// ADDRESS OFFSET : 0x18
+	uint32_t LCKR;		// ADDRESS OFFSET : 0x1C
+	uint32_t AFRL;		// ADDRESS OFFSET : 0x20
+	uint32_t AFRH;		// ADDRESS OFFSET : 0x24
+} GPIO_RegDef_t;
+
+GPIO_RegDef_t* pGPIOA = GPIOA;
+#define GPIOA	((GPIO_RegDef_t*)GPIOA_BASEADDR)
+
+
+
+
 #endif /* DRIVERS_STM32F767XX_H_ */
