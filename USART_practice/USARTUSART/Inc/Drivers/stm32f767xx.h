@@ -8,6 +8,8 @@
 #ifndef DRIVERS_STM32F767XX_H_
 #define DRIVERS_STM32F767XX_H_
 
+#include <stdint.h>
+
 #define FLASH_AXIM_BASEADDR	0x08000000U
 #define FLASH_ICTM_BASEADDR	0x00200000U
 #define ROM_BASEADDR		0x00100000U
@@ -64,22 +66,74 @@
 //GPIO
 typedef struct
 {
-	uint32_t MODER;		// ADDRESS OFFSET : 0x00
-	uint32_t OTYPER;	// ADDRESS OFFSET : 0x04
-	uint32_t OSPEEDR;	// ADDRESS OFFSET : 0x08
-	uint32_t PUPDR;		// ADDRESS OFFSET : 0x0C
-	uint32_t IDR;		// ADDRESS OFFSET : 0x10
-	uint32_t ODR;		// ADDRESS OFFSET : 0x14
-	uint32_t BSRR;		// ADDRESS OFFSET : 0x18
-	uint32_t LCKR;		// ADDRESS OFFSET : 0x1C
-	uint32_t AFRL;		// ADDRESS OFFSET : 0x20
-	uint32_t AFRH;		// ADDRESS OFFSET : 0x24
+	volatile uint32_t MODER;		// ADDRESS OFFSET : 0x00
+	volatile uint32_t OTYPER;	// ADDRESS OFFSET : 0x04
+	volatile uint32_t OSPEEDR;	// ADDRESS OFFSET : 0x08
+	volatile uint32_t PUPDR;		// ADDRESS OFFSET : 0x0C
+	volatile uint32_t IDR;		// ADDRESS OFFSET : 0x10
+	volatile uint32_t ODR;		// ADDRESS OFFSET : 0x14
+	volatile uint32_t BSRR;		// ADDRESS OFFSET : 0x18
+	volatile uint32_t LCKR;		// ADDRESS OFFSET : 0x1C
+	volatile uint32_t AFRL;		// ADDRESS OFFSET : 0x20
+	volatile uint32_t AFRH;		// ADDRESS OFFSET : 0x24
 } GPIO_RegDef_t;
 
-GPIO_RegDef_t* pGPIOA = GPIOA;
+// RCC
+typedef struct
+{
+	volatile uint32_t CR;
+	volatile uint32_t PLLCFGR;
+	volatile uint32_t CFGR;
+	volatile uint32_t CIR;
+	volatile uint32_t AHB1RSTR;
+	volatile uint32_t AHB2RSTR;
+	volatile uint32_t AHB3RSTR;
+	uint32_t RESERVED0;
+	volatile uint32_t APB1RSTR;
+	volatile uint32_t APB2RSTR;
+	uint32_t RESERVED1;
+	uint32_t RESERVED2;
+	volatile uint32_t AHB1ENR;
+	volatile uint32_t AHB2ENR;
+	volatile uint32_t AHB3ENR;
+	uint32_t RESERVED3;
+	volatile uint32_t APB1ENR;
+	volatile uint32_t APB2ENR;
+	uint32_t RESERVED4;
+	uint32_t RESERVED5;
+	volatile uint32_t AHB1LPENR;
+	volatile uint32_t AHB2LPENR;
+	volatile uint32_t AHB3LPENR;
+	uint32_t RESERVED6;
+	volatile uint32_t APB1LPENR;
+	volatile uint32_t APB2LPENR;
+	uint32_t RESERVED7;
+	uint32_t RESERVED8;
+	volatile uint32_t BDCR;
+	volatile uint32_t CSR;
+	uint32_t RESERVED9;
+	uint32_t RESERVED10;
+	volatile uint32_t SSCGR;
+	volatile uint32_t PLLI2SCFGR;
+	volatile uint32_t PLLSAICFGR;
+	volatile uint32_t DCKCFGR1;
+	volatile uint32_t DCKCFGR2;
+} RCC_RegDef_t;
+
 #define GPIOA	((GPIO_RegDef_t*)GPIOA_BASEADDR)
+#define GPIOB	((GPIO_RegDef_t*)GPIOB_BASEADDR)
+#define GPIOC	((GPIO_RegDef_t*)GPIOC_BASEADDR)
+#define GPIOD	((GPIO_RegDef_t*)GPIOD_BASEADDR)
+#define GPIOE	((GPIO_RegDef_t*)GPIOE_BASEADDR)
+#define GPIOF	((GPIO_RegDef_t*)GPIOF_BASEADDR)
+#define GPIOG	((GPIO_RegDef_t*)GPIOG_BASEADDR)
+#define GPIOH	((GPIO_RegDef_t*)GPIOH_BASEADDR)
+#define GPIOI	((GPIO_RegDef_t*)GPIOI_BASEADDR)
+#define GPIOJ	((GPIO_RegDef_t*)GPIOJ_BASEADDR)
 
+#define RCC		((RCC_RegDef_t*)RCC_BASEADDR)
 
+GPIO_RegDef_t* pGPIOA = GPIOA;
 
 
 #endif /* DRIVERS_STM32F767XX_H_ */
