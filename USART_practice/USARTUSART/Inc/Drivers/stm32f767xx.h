@@ -133,6 +133,16 @@ typedef struct
 
 #define RCC		((RCC_RegDef_t*)RCC_BASEADDR)
 
+// Clock enable macros for GPIOx peripherals
+#define GPIOA_PCLK_EN()	(RCC->AHB1ENR |= (1 << 0))
+// TODO: - CREATE ALL CLK ENABLE MACROS
+
+// Clock disable macros for GPIOx peripherals
+#define GPIOA_PCLK_DI()	(RCC->AHB1ENR &= ~(1 << 0))
+// TODO: - CREATE ALL CLK DISABLE MACROS
+
+
+
 GPIO_RegDef_t* pGPIOA = GPIOA;
 
 
