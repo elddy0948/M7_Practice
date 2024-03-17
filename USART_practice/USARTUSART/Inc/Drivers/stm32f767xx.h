@@ -157,4 +157,12 @@ typedef struct
 #define GPIOI_PCLK_DI()	(RCC->AHB1ENR &= ~(1 << 8))
 #define GPIOJ_PCLK_DI()	(RCC->AHB1ENR &= ~(1 << 9))
 
+// Some generic macros
+#define ENABLE 			1
+#define DISABLE 		0
+#define SET 			ENABLE
+#define RESET 			DISABLE
+#define GPIO_PIN_SET	SET
+#define GPIO_PIN_RESET	RESET
+
 #endif /* DRIVERS_STM32F767XX_H_ */
