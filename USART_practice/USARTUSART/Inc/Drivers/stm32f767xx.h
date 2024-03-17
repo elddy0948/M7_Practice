@@ -135,15 +135,28 @@ typedef struct
 
 // Clock enable macros for GPIOx peripherals
 #define GPIOA_PCLK_EN()	(RCC->AHB1ENR |= (1 << 0))
-// TODO: - CREATE ALL CLK ENABLE MACROS
+#define GPIOB_PCLK_EN()	(RCC->AHB1ENR |= (1 << 1))
+#define GPIOC_PCLK_EN()	(RCC->AHB1ENR |= (1 << 2))
+#define GPIOD_PCLK_EN()	(RCC->AHB1ENR |= (1 << 3))
+#define GPIOE_PCLK_EN()	(RCC->AHB1ENR |= (1 << 4))
+#define GPIOF_PCLK_EN()	(RCC->AHB1ENR |= (1 << 5))
+#define GPIOG_PCLK_EN()	(RCC->AHB1ENR |= (1 << 6))
+#define GPIOH_PCLK_EN()	(RCC->AHB1ENR |= (1 << 7))
+#define GPIOI_PCLK_EN()	(RCC->AHB1ENR |= (1 << 8))
+#define GPIOJ_PCLK_EN()	(RCC->AHB1ENR |= (1 << 9))
 
 // Clock disable macros for GPIOx peripherals
 #define GPIOA_PCLK_DI()	(RCC->AHB1ENR &= ~(1 << 0))
-// TODO: - CREATE ALL CLK DISABLE MACROS
-
-
+#define GPIOB_PCLK_DI()	(RCC->AHB1ENR &= ~(1 << 1))
+#define GPIOC_PCLK_DI()	(RCC->AHB1ENR &= ~(1 << 2))
+#define GPIOD_PCLK_DI()	(RCC->AHB1ENR &= ~(1 << 3))
+#define GPIOE_PCLK_DI()	(RCC->AHB1ENR &= ~(1 << 4))
+#define GPIOF_PCLK_DI()	(RCC->AHB1ENR &= ~(1 << 5))
+#define GPIOG_PCLK_DI()	(RCC->AHB1ENR &= ~(1 << 6))
+#define GPIOH_PCLK_DI()	(RCC->AHB1ENR &= ~(1 << 7))
+#define GPIOI_PCLK_DI()	(RCC->AHB1ENR &= ~(1 << 8))
+#define GPIOJ_PCLK_DI()	(RCC->AHB1ENR &= ~(1 << 9))
 
 GPIO_RegDef_t* pGPIOA = GPIOA;
-
 
 #endif /* DRIVERS_STM32F767XX_H_ */
