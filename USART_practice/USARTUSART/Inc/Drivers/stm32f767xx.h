@@ -157,6 +157,4 @@ typedef struct
 #define GPIOI_PCLK_DI()	(RCC->AHB1ENR &= ~(1 << 8))
 #define GPIOJ_PCLK_DI()	(RCC->AHB1ENR &= ~(1 << 9))
 
-GPIO_RegDef_t* pGPIOA = GPIOA;
-
 #endif /* DRIVERS_STM32F767XX_H_ */
