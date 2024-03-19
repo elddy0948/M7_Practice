@@ -12,11 +12,11 @@
 
 typedef struct
 {
-	uint8_t GPIO_PinNumber;
-	uint8_t GPIO_PinMode;
-	uint8_t GPIO_PinSpeed;
-	uint8_t GPIO_PinPuPdControl;
-	uint8_t GPIO_PinOPType;
+	uint8_t GPIO_PinNumber;			// @GPIO_PIN_NUMBERS
+	uint8_t GPIO_PinMode;			// @GPIO_PIN_MODES
+	uint8_t GPIO_PinSpeed;			// @GPIO_SPEED
+	uint8_t GPIO_PinPuPdControl;	// @GPIO_PULLUP_PULLDOWN
+	uint8_t GPIO_PinOPType;			// @GPIO_OUTPUT_TYPE
 	uint8_t GPIO_PinAltFunMode;
 } GPIO_PinConfig_t;
 
@@ -25,6 +25,50 @@ typedef struct
 	GPIO_RegDef_t* pGPIOx;	// this holds the base address of the GPIO port
 	GPIO_PinConfig_t GPIO_PinConfig;
 } GPIO_Handle_t;
+
+
+// @GPIO_PIN_NUMBERS
+#define GPIO_PIN_NUMBER_0	0
+#define GPIO_PIN_NUMBER_1	1
+#define GPIO_PIN_NUMBER_2	2
+#define GPIO_PIN_NUMBER_3	3
+#define GPIO_PIN_NUMBER_4	4
+#define GPIO_PIN_NUMBER_5	5
+#define GPIO_PIN_NUMBER_6	6
+#define GPIO_PIN_NUMBER_7	7
+#define GPIO_PIN_NUMBER_8	8
+#define GPIO_PIN_NUMBER_9	9
+#define GPIO_PIN_NUMBER_10	10
+#define GPIO_PIN_NUMBER_11	11
+#define GPIO_PIN_NUMBER_12	12
+#define GPIO_PIN_NUMBER_13	13
+#define GPIO_PIN_NUMBER_14	14
+#define GPIO_PIN_NUMBER_15	15
+
+// @GPIO_PIN_MODES
+#define GPIO_MODE_INPUT			0
+#define GPIO_MODE_OUTPUT		1
+#define GPIO_MODE_AF			2
+#define GPIO_MODE_ANALOG		3
+#define GPIO_MODE_IT_FALLING	4
+#define GPIO_MODE_IT_RISING		5
+#define GPIO_MODE_IT_RFTRIGGER	6
+
+// @GPIO_OUTPUT_TYPE
+#define GPIO_OUTPUT_TYPE_PP	0
+#define	GPIO_OUTPUT_TYPE_OD	1
+
+// @GPIO_SPEED
+#define GPIO_SPEED_LOW		0
+#define	GPIO_SPEED_MEDIUM	1
+#define GPIO_SPEED_FAST		2
+#define GPIO_SPEED_HIGH		3
+
+// @GPIO_PULLUP_PULLDOWN
+#define GPIO_PUPD_NO_PUPD	0
+#define GPIO_PUPD_PU		1
+#define GPIO_PUPD_PD		2
+
 
 // APIs
 void GPIO_PCLKControl(GPIO_RegDef_t* pGPIOx, uint8_t EnorDi);
