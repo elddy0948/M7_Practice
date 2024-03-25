@@ -17,7 +17,7 @@ typedef struct
 	uint8_t GPIO_PinSpeed;			// @GPIO_SPEED
 	uint8_t GPIO_PinPuPdControl;	// @GPIO_PULLUP_PULLDOWN
 	uint8_t GPIO_PinOPType;			// @GPIO_OUTPUT_TYPE
-	uint8_t GPIO_PinAltFunMode;
+	uint8_t GPIO_PinAltFunMode;		// @GPIO_ALTERNATE_FUNCTION
 } GPIO_PinConfig_t;
 
 typedef struct
@@ -69,6 +69,23 @@ typedef struct
 #define GPIO_PUPD_PU		1
 #define GPIO_PUPD_PD		2
 
+// @GPIO_ALTERNATE_FUNCTION
+#define GPIO_ALTFUNC0	0
+#define GPIO_ALTFUNC1	1
+#define GPIO_ALTFUNC2	2
+#define GPIO_ALTFUNC3	3
+#define	GPIO_ALTFUNC4	4
+#define GPIO_ALTFUNC5	5
+#define GPIO_ALTFUNC6	6
+#define GPIO_ALTFUNC7	7
+#define	GPIO_ALTFUNC8	8
+#define GPIO_ALTFUNC9	9
+#define GPIO_ALTFUNC10	10
+#define GPIO_ALTFUNC11	11
+#define GPIO_ALTFUNC12	12
+#define	GPIO_ALTFUNC13	13
+#define GPIO_ALTFUNC14	14
+#define GPIO_ALTFUNC15	15
 
 // APIs
 void GPIO_PCLKControl(GPIO_RegDef_t* pGPIOx, uint8_t EnorDi);

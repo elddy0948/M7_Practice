@@ -112,15 +112,43 @@ void GPIO_PCLKControl(GPIO_RegDef_t* pGPIOx, uint8_t EnorDi)
 
 void GPIO_Init(GPIO_Handle_t* pGPIOHandle)
 {
+	uint32_t temp = 0;
+
 	// 1. configure the mode of gpio pin
+	if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode <= GPIO_MODE_ANALOG)
+	{
+		// non-interrupt mode
+		temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinMode << (2 * pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
+		pGPIOHandle->pGPIOx->MODER = temp;
+	}
+	else
+	{
+		// TODO: - interrupt mode
+	}
+
+	temp = 0;
 
 	// 2. configure the speed
+	temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinSpeed << (2 * pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
+	pGPIOHandle->pGPIOx->OSPEEDR = temp;
+	temp = 0;
 
 	// 3. configure the pupd settings
+	temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinPuPdControl << (2 * pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
+	pGPIOHandle->pGPIOx->PUPDR = temp;
+	temp = 0;
 
 	// 4. configure the outputtype
+	temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinOPType << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
+	pGPIOHandle->pGPIOx->OTYPER = temp;
+	temp = 0;
 
 	// 5. configure the alternate functionality
+	if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode == GPIO_MODE_AF)
+	{
+		// configure the alt function registers.
+
+	}
 }
 void GPIO_DeInit(GPIO_RegDef_t* pGPIOx)
 {
