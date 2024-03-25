@@ -74,8 +74,7 @@ typedef struct
 	volatile uint32_t ODR;		// ADDRESS OFFSET : 0x14
 	volatile uint32_t BSRR;		// ADDRESS OFFSET : 0x18
 	volatile uint32_t LCKR;		// ADDRESS OFFSET : 0x1C
-	volatile uint32_t AFRL;		// ADDRESS OFFSET : 0x20
-	volatile uint32_t AFRH;		// ADDRESS OFFSET : 0x24
+	volatile uint32_t AFR[2];	// ADDRESS OFFSET : 0x20 ~ 0x24
 } GPIO_RegDef_t;
 
 // RCC
