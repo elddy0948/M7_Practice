@@ -158,26 +158,46 @@ void GPIO_Init(GPIO_Handle_t* pGPIOHandle)
 		pGPIOHandle->pGPIOx->AFR[temp1] |= (pGPIOHandle->GPIO_PinConfig.GPIO_PinAltFunMode << (4 * temp2));
 	}
 }
+
 void GPIO_DeInit(GPIO_RegDef_t* pGPIOx)
 {
-
+	// Using reset register
+	// RCC_AHB1RSTR
+	if(pGPIOx == GPIOA) { GPIOA_REG_RESET(); }
+	else if(pGPIOx == GPIOB) { GPIOB_REG_RESET(); }
+	else if(pGPIOx == GPIOC) { GPIOC_REG_RESET(); }
+	else if(pGPIOx == GPIOD) { GPIOD_REG_RESET(); }
+	else if(pGPIOx == GPIOE) { GPIOE_REG_RESET(); }
+	else if(pGPIOx == GPIOF) { GPIOF_REG_RESET(); }
+	else if(pGPIOx == GPIOG) { GPIOG_REG_RESET(); }
+	else if(pGPIOx == GPIOH) { GPIOH_REG_RESET(); }
+	else if(pGPIOx == GPIOI) { GPIOI_REG_RESET(); }
+	else if(pGPIOx == GPIOJ) { GPIOJ_REG_RESET(); }
 }
 
 uint8_t GPIO_ReadFromInputPin(GPIO_RegDef_t* pGPIOx, uint8_t PinNumber)
 {
-
+	uint8_t value;
+	value = (uint8_t)((pGPIOx->IDR >> PinNumber) & 0x00000001);
+	return value;
 }
+
 uint16_t GPIO_ReadFromInputPort(GPIO_RegDef_t* pGPIOx)
 {
-
+	uint16_t value;
+	value = pGPIOx->IDR;
+	return value;
 }
+
 void GPIO_WriteToOutputPin(GPIO_RegDef_t* pGPIOx, uint8_t PinNumber, uint8_t Value)
-{}
+{
+}
 
 void GPIO_WriteToOutputPort(GPIO_RegDef_t* pGPIOx, uint16_t Value)
 {
 
 }
+
 void GPIO_ToggleOutputPin(GPIO_RegDef_t* pGPIOx, uint8_t PinNumber)
 {
 
@@ -187,6 +207,7 @@ void GPIO_IRQConfig(uint8_t IRQNumber, uint8_t IRQPriority, uint8_t EnorDi)
 {
 
 }
+
 void GPIO_IRQHandling(uint8_t PinNumber)
 {
 
