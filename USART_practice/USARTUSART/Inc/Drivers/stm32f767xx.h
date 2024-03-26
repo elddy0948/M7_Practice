@@ -176,4 +176,6 @@ typedef struct
 #define GPIO_PIN_SET	SET
 #define GPIO_PIN_RESET	RESET
 
+#include "Drivers/stm32f767xx_gpio_driver.h"
+
 #endif /* DRIVERS_STM32F767XX_H_ */

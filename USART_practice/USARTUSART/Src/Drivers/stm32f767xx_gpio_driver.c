@@ -191,16 +191,25 @@ uint16_t GPIO_ReadFromInputPort(GPIO_RegDef_t* pGPIOx)
 
 void GPIO_WriteToOutputPin(GPIO_RegDef_t* pGPIOx, uint8_t PinNumber, uint8_t Value)
 {
+	if(Value == GPIO_PIN_SET)
+	{
+		pGPIOx->ODR |= (1 << PinNumber);
+	}
+	else
+	{
+		pGPIOx->ODR &= ~(1 << PinNumber);
+	}
 }
 
 void GPIO_WriteToOutputPort(GPIO_RegDef_t* pGPIOx, uint16_t Value)
 {
-
+	pGPIOx->ODR = Value;
 }
 
 void GPIO_ToggleOutputPin(GPIO_RegDef_t* pGPIOx, uint8_t PinNumber)
 {
-
+	// Use Exclusive OR
+	pGPIOx->ODR ^= (1 << PinNumber);
 }
 
 void GPIO_IRQConfig(uint8_t IRQNumber, uint8_t IRQPriority, uint8_t EnorDi)
