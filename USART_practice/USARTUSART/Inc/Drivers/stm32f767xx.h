@@ -25,6 +25,32 @@
 #define AHB3PERIPH_BASEADDR		0x60000000U
 #define INTERNALPERIPH_BASEADDR	0xE0000000U
 
+// NVIC ISERx register
+#define NVIC_ICTR		((volatile uint32_t*)0xE000E004)
+#define NVIC_ISER0		((volatile uint32_t*)0xE000E100)
+#define NVIC_ISER1		((volatile uint32_t*)0xE000E104)
+#define NVIC_ISER2		((volatile uint32_t*)0xE000E108)
+#define NVIC_ISER3		((volatile uint32_t*)0xE000E10C)
+#define NVIC_ISER4		((volatile uint32_t*)0xE000E110)
+#define NVIC_ISER5		((volatile uint32_t*)0xE000E114)
+#define NVIC_ISER6		((volatile uint32_t*)0xE000E118)
+#define NVIC_ISER7		((volatile uint32_t*)0xE000E11C)
+
+// NVIC ICERx register
+#define NVIC_ICER0		((volatile uint32_t*)0xE000E180)
+#define NVIC_ICER1		((volatile uint32_t*)0xE000E184)
+#define NVIC_ICER2		((volatile uint32_t*)0xE000E188)
+#define NVIC_ICER3		((volatile uint32_t*)0xE000E18C)
+#define NVIC_ICER4		((volatile uint32_t*)0xE000E190)
+#define NVIC_ICER5		((volatile uint32_t*)0xE000E194)
+#define NVIC_ICER6		((volatile uint32_t*)0xE000E198)
+#define NVIC_ICER7		((volatile uint32_t*)0xE000E19C)
+
+// NVIC Interrupt Priority Register
+#define NVIC_IPR_BASE_ADDR		((volatile uint32_t*)0xE000E400)
+
+#define NO_IPR_BITS_IMPLEMENTED	4
+
 // GPIO BASE ADDRESS
 #define GPIOA_BASEADDR		(AHB1PERIPH_BASEADDR + 0x0000U)
 #define GPIOB_BASEADDR		(AHB1PERIPH_BASEADDR + 0x0400U)
@@ -60,16 +86,15 @@
 #define SYSCFG_BASEADDR		(APB2PERIPH_BASEADDR + 0x3800U)
 #define EXTI_BASEADDR		(APB2PERIPH_BASEADDR + 0x3C00U)
 
-
 // Peripheral register definition structures
 
 //GPIO
 typedef struct
 {
-	volatile uint32_t MODER;		// ADDRESS OFFSET : 0x00
+	volatile uint32_t MODER;	// ADDRESS OFFSET : 0x00
 	volatile uint32_t OTYPER;	// ADDRESS OFFSET : 0x04
 	volatile uint32_t OSPEEDR;	// ADDRESS OFFSET : 0x08
-	volatile uint32_t PUPDR;		// ADDRESS OFFSET : 0x0C
+	volatile uint32_t PUPDR;	// ADDRESS OFFSET : 0x0C
 	volatile uint32_t IDR;		// ADDRESS OFFSET : 0x10
 	volatile uint32_t ODR;		// ADDRESS OFFSET : 0x14
 	volatile uint32_t BSRR;		// ADDRESS OFFSET : 0x18
@@ -119,6 +144,28 @@ typedef struct
 	volatile uint32_t DCKCFGR2;
 } RCC_RegDef_t;
 
+// SYSCFG
+typedef struct
+{
+	volatile uint32_t MEMRMP;		// Address offset : 0x00
+	volatile uint32_t PMC;			// Address offset : 0x04
+	volatile uint32_t EXTICR[4];	// Address offset : 0x08 ~ 0x14
+	uint32_t RESERVED1;				// Address offset : 0x18
+	volatile uint32_t CBR;			// Address offset : 0x1C
+	volatile uint32_t CMPCR;		// Address offset : 0x20
+} SYSCFG_RegDef_t;
+
+// EXTI
+typedef struct
+{
+	volatile uint32_t IMR;			// Address offset : 0x00
+	volatile uint32_t EMR;			// Address offset : 0x04
+	volatile uint32_t RTSR;			// Address offset : 0x08
+	volatile uint32_t FTSR;			// Address offset : 0x0C
+	volatile uint32_t SWIER;		// Address offset : 0x10
+	volatile uint32_t PR;			// Address offset : 0x14
+} EXTI_RegDef_t;
+
 #define GPIOA	((GPIO_RegDef_t*)GPIOA_BASEADDR)
 #define GPIOB	((GPIO_RegDef_t*)GPIOB_BASEADDR)
 #define GPIOC	((GPIO_RegDef_t*)GPIOC_BASEADDR)
@@ -131,6 +178,10 @@ typedef struct
 #define GPIOJ	((GPIO_RegDef_t*)GPIOJ_BASEADDR)
 
 #define RCC		((RCC_RegDef_t*)RCC_BASEADDR)
+
+#define EXTI	((EXTI_RegDef_t*)EXTI_BASEADDR)
+
+#define SYSCFG	((SYSCFG_RegDef_t*)SYSCFG_BASEADDR)
 
 // Clock enable macros for GPIOx peripherals
 #define GPIOA_PCLK_EN()	(RCC->AHB1ENR |= (1 << 0))
@@ -167,6 +218,29 @@ typedef struct
 #define GPIOH_REG_RESET() do{ (RCC->AHB1RSTR |= (1 << 7)); (RCC->AHB1RSTR &= ~(1 << 7)); } while(0)
 #define GPIOI_REG_RESET() do{ (RCC->AHB1RSTR |= (1 << 8)); (RCC->AHB1RSTR &= ~(1 << 8)); } while(0)
 #define GPIOJ_REG_RESET() do{ (RCC->AHB1RSTR |= (1 << 9)); (RCC->AHB1RSTR &= ~(1 << 9)); } while(0)
+
+#define GPIO_BASEADDR_TO_CODE(x)	( (x == GPIOA) ? 0 : \
+									  (x == GPIOB) ? 1 : \
+									  (x == GPIOC) ? 2 : \
+									  (x == GPIOD) ? 3 : \
+									  (x == GPIOE) ? 4 : \
+									  (x == GPIOF) ? 5 : \
+									  (x == GPIOC) ? 6 : \
+									  (x == GPIOH) ? 7 : \
+									  (x == GPIOI) ? 8 : \
+									  (x == GPIOJ) ? 9 : 0 )
+
+// IRQ
+#define IRQ_NUMBER_EXTI0		6
+#define IRQ_NUMBER_EXTI1		7
+#define IRQ_NUMBER_EXTI2		8
+#define IRQ_NUMBER_EXTI3		9
+#define IRQ_NUMBER_EXIT4		10
+#define IRQ_NUMBER_EXTI9_5		23
+#define IRQ_NUMBER_EXIT15_10	40
+
+// SYSCFG peripheral
+#define SYSCFG_PCLK_EN()	(RCC->APB2ENR |= (1 << 14))
 
 // Some generic macros
 #define ENABLE 			1
