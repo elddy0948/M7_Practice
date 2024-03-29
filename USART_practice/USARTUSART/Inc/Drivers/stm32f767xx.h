@@ -239,6 +239,10 @@ typedef struct
 #define IRQ_NUMBER_EXTI9_5		23
 #define IRQ_NUMBER_EXIT15_10	40
 
+// priority levels
+#define NVIC_IRQ_PRIORITY_0		0
+#define NVIC_IRQ_PRIORITY_15	15
+
 // SYSCFG peripheral
 #define SYSCFG_PCLK_EN()	(RCC->APB2ENR |= (1 << 14))
 
