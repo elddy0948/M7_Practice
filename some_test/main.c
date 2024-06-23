@@ -1,9 +1,0 @@
-// BOARD = NUCLEO-F767ZI
-// MCU = STM32F767ZITx
-// TFT-LCD = HX8347-A
-// PD0 ~ PD15 = TFT_D0 ~ TFT_D15
-// PE0 = TFT_WR
-// PE1 = TFT_RS
-// PE2 = TFT_CS
-// PE3 = TFT_RESET
-#include "stm32f7xx.h"
