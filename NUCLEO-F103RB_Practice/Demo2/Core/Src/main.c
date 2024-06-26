@@ -21,7 +21,11 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "hj_adc.h"
+#include "hj_clcd.h"
+#include "hj_communication.h"
+#include "hj_i2c.h"
+#include "hj_tim.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -116,12 +120,42 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 
+  ADC_Start(&hadc1);
+  I2C_Start(&hi2c1);
+
+  Servo_Start(&htim3);
+  RGB_Start(&htim4);
+
+  CLCD_Start();
+
+  HM10_Initialize(&huart1);
+
+  HAL_Delay(100);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  float hdc_temp = 0.0;
+  uint8_t hdc_hum = 0;
+  int led_value = 0, switch_value = 0;
+  int8_t i = 0;
+
   while (1)
   {
+	  // Gather sensor values
+	  hdc1080_measure(&hi2c1, &hdc_temp, &hdc_hum);
+
+	  led_value = (HAL_GPIO_ReadPin(LED0_GPIO_Port, LED0_Pin) << 24) |
+			  (HAL_GPIO_ReadPin(LED1_GPIO_Port, LED1_Pin) << 16) |
+			  (HAL_GPIO_ReadPin(LED2_GPIO_Port, LED2_Pin) << 8) |
+			  (HAL_GPIO_ReadPin(LED3_GPIO_Port, LED3_Pin));
+
+	  switch_value = ((!HAL_GPIO_ReadPin(SW0_GPIO_Port, SW0_Pin)) << 24) |
+			  ((!HAL_GPIO_ReadPin(SW1_GPIO_Port, SW1_Pin)) << 16) |
+			  ((!HAL_GPIO_ReadPin(SW2_GPIO_Port, SW2_Pin)) << 8) |
+			  ((!HAL_GPIO_ReadPin(SW3_GPIO_Port, SW3_Pin)));
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
