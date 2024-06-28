@@ -144,7 +144,6 @@ int main(void)
 
 	while (1)
 	{
-//		DAC7512_write(&hspi2, 0);
 		//TODO: - make keep call DAC7512_write logic
 
 		if (TIM_Check_TIM2_flag()) {

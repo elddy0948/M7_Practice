@@ -32,7 +32,7 @@ void HM10_Initialize(UART_HandleTypeDef *huart)
 {
 	char rx_buffer[32] = {0};
 
-	RB_init(&uart1Fifo, 64);
+	RB_init(&uart1Fifo, 100);
 
 	__HAL_UART_DISABLE_IT(huart, UART_IT_RXNE);
 
@@ -57,7 +57,7 @@ void HM10_Initialize(UART_HandleTypeDef *huart)
 	Transmit_AT_command(huart, "AT+TYPE?", rx_buffer, sizeof(rx_buffer), 100);
 	printf("TYPE \t: %s\n", rx_buffer);
 
-	__HAL_UART_ENABLE_IT(huart, UART_IT_RXNE);
+//	__HAL_UART_ENABLE_IT(huart, UART_IT_RXNE);
 }
 
 int WaitPacket(int timeout)
@@ -123,6 +123,8 @@ uint8_t BLE_Read_command(char *pBuf, size_t bufferSize)
 		printf("%02x ", pBuf[i]);
 
 	printf("\n\n");
+
+	return 1;
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
