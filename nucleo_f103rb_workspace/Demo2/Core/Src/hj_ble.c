@@ -9,9 +9,9 @@
 
 #include "hj_ble.h"
 
-RingFifo_t uart1Fifo = {};
+static RingFifo_t uart1Fifo = {};
 
-int Transmit_AT_command(UART_HandleTypeDef *huart, const char *pCommand, char *pBuffer, int buffer_size, int timeout)
+int BLE_Tx_AT_command(UART_HandleTypeDef *huart, const char *pCommand, char *pBuffer, int buffer_size, int timeout)
 {
 	int res = 0;
 
@@ -28,7 +28,7 @@ int Transmit_AT_command(UART_HandleTypeDef *huart, const char *pCommand, char *p
 }
 
 
-void HM10_Initialize(UART_HandleTypeDef *huart)
+void BLE_HM10_Init(UART_HandleTypeDef *huart)
 {
 	char rx_buffer[32] = {0};
 
@@ -36,7 +36,7 @@ void HM10_Initialize(UART_HandleTypeDef *huart)
 
 	__HAL_UART_DISABLE_IT(huart, UART_IT_RXNE);
 
-	Transmit_AT_command(huart, "AT", rx_buffer, sizeof(rx_buffer), 500);
+	BLE_Tx_AT_command(huart, "AT", rx_buffer, sizeof(rx_buffer), 500);
 
 	if (!strcmp(rx_buffer, "OK")) {
 		printf("\nAT Command available!\n");
@@ -45,22 +45,22 @@ void HM10_Initialize(UART_HandleTypeDef *huart)
 
 	HAL_Delay(1000);
 
-	Transmit_AT_command(huart, "AT+ADDR?", rx_buffer, sizeof(rx_buffer), 100);
-	printf("ADDR \t: %s\n", rx_buffer);
+	BLE_Tx_AT_command(huart, "AT+ADDR?", rx_buffer, sizeof(rx_buffer), 100);
+	printf("ADDR \t\t: %s\n", rx_buffer);
 
-	Transmit_AT_command(huart, "AT+NAME?", rx_buffer, sizeof(rx_buffer), 100);
-	printf("NAME \t: %s\n", rx_buffer);
+	BLE_Tx_AT_command(huart, "AT+NAME?", rx_buffer, sizeof(rx_buffer), 100);
+	printf("NAME \t\t: %s\n", rx_buffer);
 
-	Transmit_AT_command(huart, "AT+PASS?", rx_buffer, sizeof(rx_buffer), 100);
+	BLE_Tx_AT_command(huart, "AT+PASS?", rx_buffer, sizeof(rx_buffer), 100);
 	printf("PASSWORD \t: %s\n", rx_buffer);
 
-	Transmit_AT_command(huart, "AT+TYPE?", rx_buffer, sizeof(rx_buffer), 100);
-	printf("TYPE \t: %s\n", rx_buffer);
+	BLE_Tx_AT_command(huart, "AT+TYPE?", rx_buffer, sizeof(rx_buffer), 100);
+	printf("TYPE \t\t: %s\n", rx_buffer);
 
-//	__HAL_UART_ENABLE_IT(huart, UART_IT_RXNE);
+	fflush(stdout);
 }
 
-int WaitPacket(int timeout)
+int BLE_Wait_packet(int timeout)
 {
 	if (!RB_isempty(&uart1Fifo))
 		return 0;
@@ -104,25 +104,18 @@ uint8_t BLE_Read_command(char *pBuf, size_t bufferSize)
 	pBuf[index++] = STX;
 
 	for (i = 0; i < 3; ++i) {
-		if (!WaitPacket(TIMEOUT))
+		if (!BLE_Wait_packet(TIMEOUT))
 			pBuf[index++] = RB_read(&uart1Fifo);
 		else
 			return 0;
 	}
 
 	for (i = 0; i < pBuf[3] + 1; ++i) {
-		if (!WaitPacket(TIMEOUT))
+		if (!BLE_Wait_packet(TIMEOUT))
 			pBuf[index++] = RB_read(&uart1Fifo);
 		else
 			return 0;
 	}
-
-	printf("Packet received complete : ");
-
-	for (i = 0; i < index; ++i)
-		printf("%02x ", pBuf[i]);
-
-	printf("\n\n");
 
 	return 1;
 }

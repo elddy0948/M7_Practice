@@ -16,11 +16,6 @@
  * which is using GPIO OUTPUT or INPUT
  */
 
-extern volatile int ledState;
-extern volatile int switchState;
-extern volatile int encoderValue;
-extern char clcd[17];
-
 void GPIO_CLCD_start(void);
 
 int GPIO_Get_LED_state(void);

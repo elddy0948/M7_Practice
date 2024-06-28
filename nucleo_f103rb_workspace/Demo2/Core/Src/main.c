@@ -137,6 +137,8 @@ int main(void)
 
 	Demo2_Initialize();
 
+	__HAL_UART_ENABLE_IT(&huart1, UART_IT_RXNE);
+
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -144,8 +146,6 @@ int main(void)
 
 	while (1)
 	{
-		//TODO: - make keep call DAC7512_write logic
-
 		if (TIM_Check_TIM2_flag()) {
 			TIM_Reset_TIM2_flag();
 			DAC7512_write(&hspi2);
@@ -703,8 +703,10 @@ void Demo2_Initialize(void)
 	Servo_Start(&htim4);
 	RGB_Start(&htim3);
 	GPIO_CLCD_start();
-	HM10_Initialize(&huart1);
+	BLE_HM10_Init(&huart1);
 	TxTimer_Start(&htim2);
+//	__HAL_UART_ENABLE_IT(&huart1, UART_IT_RXNE);
+
 	HAL_Delay(100);
 }
 

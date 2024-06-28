@@ -7,14 +7,12 @@
 
 #include "hj_tim.h"
 
-volatile uint8_t timer2Flag = 0;
-uint8_t rgbPulse[3] = {0};
+static volatile uint8_t timer2Flag = 0;
+static uint8_t rgbPulse[3] = {0};
 
 void Servo_Start(TIM_HandleTypeDef *htim)
 {
 	HAL_TIM_PWM_Start(htim, TIM_CHANNEL_2);
-
-	printf("Servo start\n");
 }
 
 void RGB_Start(TIM_HandleTypeDef *htim)
@@ -22,14 +20,11 @@ void RGB_Start(TIM_HandleTypeDef *htim)
 	HAL_TIM_PWM_Start(htim, TIM_CHANNEL_1);
 	HAL_TIM_PWM_Start(htim, TIM_CHANNEL_2);
 	HAL_TIM_PWM_Start(htim, TIM_CHANNEL_3);
-
-	printf("RGB start\n");
 }
 
 void TxTimer_Start(TIM_HandleTypeDef *htim)
 {
 	HAL_TIM_Base_Start_IT(htim);
-	printf("TX Timer start\n");
 }
 
 uint8_t TIM_Check_TIM2_flag(void)

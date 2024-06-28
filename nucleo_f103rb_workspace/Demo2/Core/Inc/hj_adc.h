@@ -18,7 +18,7 @@
  * TC1014 	: 		ADC1_IN4(PA4)
  */
 
-extern volatile uint16_t adcValues[3];;
+extern volatile uint16_t adcValues[3];
 
 void ADC_Start(ADC_HandleTypeDef *hadc);
 

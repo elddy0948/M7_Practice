@@ -8,7 +8,7 @@
 
 #include "hj_spi.h"
 
-unsigned short dacData = 4095;
+static unsigned short dacData = 4095;
 
 uint8_t DAC7512_write(SPI_HandleTypeDef *hspi)
 {

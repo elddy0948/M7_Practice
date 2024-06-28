@@ -12,9 +12,6 @@
 
 #include "hdc1080.h"
 
-extern float hdc_temp;
-extern uint8_t hdc_hum;
-
 void I2C_Start(I2C_HandleTypeDef *hi2c);
 void I2C_HDC1080_Get_values(I2C_HandleTypeDef *hi2c);
 uint32_t I2C_HDC1080_Get_temp(void);

@@ -10,9 +10,6 @@
 
 #include "hj_def.h"
 
-extern volatile uint8_t timer2Flag;
-extern uint8_t rgbPulse[3];
-
 void Servo_Start(TIM_HandleTypeDef *htim);
 void RGB_Start(TIM_HandleTypeDef *htim);
 void TxTimer_Start(TIM_HandleTypeDef *htim);

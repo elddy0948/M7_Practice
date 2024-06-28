@@ -31,11 +31,11 @@
 #define BLE_CMD_R				0x52
 #define BLE_CMD_W				0x57
 
-extern RingFifo_t uart1Fifo;
+//extern RingFifo_t uart1Fifo;
 
-int Transmit_AT_command(UART_HandleTypeDef *huart, const char *pCommand, char *pBuffer, int buffer_size, int timeout);
-void HM10_Initialize(UART_HandleTypeDef *huart);
-int WaitPacket(int timeout);
+int BLE_Tx_AT_command(UART_HandleTypeDef *huart, const char *pCommand, char *pBuffer, int buffer_size, int timeout);
+void BLE_HM10_Init(UART_HandleTypeDef *huart);
+int BLE_Wait_packet(int timeout);
 uint8_t BLE_Check_Rx_start(void);
 uint8_t BLE_Read_command(char *pBuf, size_t bufferSize);
 

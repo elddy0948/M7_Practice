@@ -7,15 +7,14 @@
 
 #include "hj_gpio.h"
 
-volatile int ledState = 0;
-volatile int switchState = 0;
-volatile int encoderValue = 0;
-char clcd[17] = {0};
+static volatile int ledState = 0;
+static volatile int switchState = 0;
+static volatile int encoderValue = 0;
+static char clcd[17] = {0};
 
 void GPIO_CLCD_start(void)
 {
 	CLCD_Init(16, 2);
-	printf("CLCD Start\n");
 }
 
 int GPIO_Get_LED_state(void)

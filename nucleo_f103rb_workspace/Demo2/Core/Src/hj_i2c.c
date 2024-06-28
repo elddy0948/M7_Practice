@@ -8,8 +8,8 @@
 
 #include "hj_i2c.h"
 
-float hdc_temp = .0;
-uint8_t hdc_hum = 0;
+static float hdc_temp = .0;
+static uint8_t hdc_hum = 0;
 
 void I2C_Start(I2C_HandleTypeDef *hi2c)
 {
@@ -18,8 +18,6 @@ void I2C_Start(I2C_HandleTypeDef *hi2c)
 
 	hdc1080_read_reg(hi2c, HDC1080_ID_DEV, &i2c_id);
 	hdc1080_init(hi2c, HDC1080_T_RES_14, HDC1080_RH_RES_14, 1, &bat_stat);
-
-	printf("HDC1080 ID : %X\n", i2c_id);
 }
 
 void I2C_HDC1080_Get_values(I2C_HandleTypeDef *hi2c)
